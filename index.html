@@ -31,9 +31,9 @@
                         </div>
                     </div>
                     <div class="card-header border-secondary">
-                        <label for="minitesPerPerson">Minites</label>
                         <input type="range" class="custom-range col-10" min="1" max="60" value="5"
                             id="minitesPerPerson">
+                        <span id="minitesPerPersonValue">5</span> min
                     </div>
                     <div class="card-header border-success">
                         <div class="row">
@@ -124,12 +124,12 @@
                 var remain = endDate - nowDate; // msec
                 var percent = Math.round(100.0 * elapsed / (elapsed + remain));
 
-                document.getElementById("elapsed").innerHTML = dateFormat.format(new Date(1000 * Math.floor(elapsed/1000)), 'mm:ss');
+                document.getElementById("elapsed").innerHTML = dateFormat.format(new Date(1000 * Math.floor(elapsed / 1000)), 'mm:ss');
 
                 if (remain < 500) {
                     document.getElementById("remain").innerHTML = "00:00";
-                }else  if (remain >= 0) {
-                    document.getElementById("remain").innerHTML = dateFormat.format(new Date(1000 * Math.ceil(remain/1000)), 'mm:ss');
+                } else if (remain >= 0) {
+                    document.getElementById("remain").innerHTML = dateFormat.format(new Date(1000 * Math.ceil(remain / 1000)), 'mm:ss');
                 }
 
                 updateProgress(percent);
@@ -214,6 +214,10 @@
             }
 
         }
+
+        document.getElementById("minitesPerPerson").addEventListener("input", function () {
+            document.getElementById("minitesPerPersonValue").innerHTML = document.getElementById("minitesPerPerson").value;
+        });
 
         document.getElementById("next").addEventListener("click", function () {
             next();
